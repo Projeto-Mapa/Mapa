@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa Interativo - Estados do Brasil</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      padding: 20px;
+      background-color: #007bff;
+      color: white;
+      margin: 0;
+    }
+    #map {
+      height: 600px; /* Altura do mapa */
+      width: 100%;   /* Largura do mapa */
+    }
+    .popup-content {
+      width: 200px; /* Largura da popup */
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mapa Interativo - Estados do Brasil</h1>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Inicializa o mapa, centralizado no Brasil
+    var map = L.map('map').setView([-15.7801, -47.9292], 4); // Centraliza no Brasil, com zoom 4
+
+    // Adiciona a camada de fundo OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Lista de Estados e suas informações
+    var estados = [
+      { nome: "Acre", coords: [-9.9749, -67.7323], detalhesLink: "acre.html" },
+      { nome: "Alagoas", coords: [-9.5705, -36.7820], detalhesLink: "alagoas.html" },
+      { nome: "Amapá", coords: [1.4119, -51.0772], detalhesLink: "amapa.html" },
+      { nome: "Amazonas", coords: [-3.4166, -65.8569], detalhesLink: "amazonas.html" },
+      { nome: "Bahia", coords: [-12.9714, -38.5014], detalhesLink: "bahia.html" },
+      { nome: "Ceará", coords: [-3.7172, -38.5434], detalhesLink: "ceara.html" },
+      { nome: "Distrito Federal", coords: [-15.7801, -47.9292], detalhesLink: "df.html" },
+      { nome: "Espírito Santo", coords: [-20.3155, -40.3128], detalhesLink: "espirito_santo.html" },
+      { nome: "Goiás", coords: [-16.6463, -49.2643], detalhesLink: "goias.html" },
+      { nome: "Maranhão", coords: [-5.4423, -45.4689], detalhesLink: "maranhao.html" },
+      { nome: "Mato Grosso", coords: [-12.9716, -55.5586], detalhesLink: "matogrosso.html" },
+      { nome: "Mato Grosso do Sul", coords: [-20.4697, -54.6201], detalhesLink: "matogrossodosul.html" },
+      { nome: "Minas Gerais", coords: [-18.5129, -44.5550], detalhesLink: "minas_gerais.html" },
+      { nome: "Pará", coords: [-3.3206, -52.2905], detalhesLink: "para.html" },
+      { nome: "Paraíba", coords: [-7.1203, -35.4587], detalhesLink: "paraiba.html" },
+      { nome: "Paraná", coords: [-25.4284, -49.2733], detalhesLink: "parana.html" },
+      { nome: "Pernambuco", coords: [-8.0476, -34.8770], detalhesLink: "pernambuco.html" },
+      { nome: "Piauí", coords: [-7.5329, -41.7717], detalhesLink: "piaui.html" },
+      { nome: "Rio de Janeiro", coords: [-22.9068, -43.1729], detalhesLink: "rio_de_janeiro.html" },
+      { nome: "Rio Grande do Norte", coords: [-5.7945, -36.5810], detalhesLink: "rio_grande_do_norte.html" },
+      { nome: "Rio Grande do Sul", coords: [-30.0346, -51.2177], detalhesLink: "rio_grande_do_sul.html" },
+      { nome: "Rondônia", coords: [-11.2555, -63.4165], detalhesLink: "rondonia.html" },
+      { nome: "Roraima", coords: [1.8972, -61.3604], detalhesLink: "roraima.html" },
+      { nome: "Santa Catarina", coords: [-27.5954, -48.5480], detalhesLink: "santa_catarina.html" },
+      { nome: "São Paulo", coords: [-23.5505, -46.6333], detalhesLink: "sao_paulo.html" },
+      { nome: "Sergipe", coords: [-10.9472, -37.0731], detalhesLink: "sergipe.html" },
+      { nome: "Tocantins", coords: [-10.2306, -48.2500], detalhesLink: "tocantins.html" }
+    ];
+
+    // Loop para adicionar os marcadores dos Estados
+    estados.forEach(function(estado) {
+      var marker = L.marker(estado.coords).addTo(map);
+      marker.bindPopup(
+        "<div class='popup-content'>" +
+        "<b>" + estado.nome + "</b><br>" +
+        "<a href='" + estado.detalhesLink + "'>Ver detalhes</a>" +
+        "</div>"
+      );
+    });
+  </script>
+</body>
+</html>
