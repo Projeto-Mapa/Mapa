@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comando Militar da Amazônia - Acre</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    header {
+      background-color: #006400;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #006400;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    .img-state {
+      max-width: 200px; /* Ajuste o tamanho máximo da imagem do estado */
+      margin: 20px 0;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    ul li {
+      background-color: #eef6f3;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+    }
+    .details {
+      display: none;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 5px;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+  <script>
+    function toggleDetails(id) {
+      const details = document.getElementById(id);
+      if (details.style.display === "none" || details.style.display === "") {
+        details.style.display = "block";
+      } else {
+        details.style.display = "none";
+      }
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Comando Militar da Amazônia - Acre</h1>
+  </header>
+
+  <main>
+    <h2>Imagem do Estado</h2>
+    <img class="img-state" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/CMA.png" alt="Acre" />
+
+    <h2>Nome da Capital</h2>
+    <p>Rio Branco</p>
+
+    <h2>Descrição</h2>
+    <p>Rio Branco é a capital do estado do Acre e é conhecida por sua diversidade cultural e pela rica história relacionada à borracha e à luta pela defesa da Amazônia.</p>
+
+    <h2>Imagem da Cidade</h2>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Rio_Branco.jpg" alt="Rio Branco" />
+
+    <h2>População</h2>
+    <p>A população de Rio Branco é de aproximadamente 400.000 habitantes (dados de 2020).</p>
+
+    <h2>Pontos Turísticos</h2>
+    <ul>
+      <li>Palácio da Justiça</li>
+      <li>Teatro Plácido de Castro</li>
+      <li>Parque Zoobotânico</li>
+    </ul>
+
+    <h2>Eventos Culturais</h2>
+    <p>Rio Branco celebra diversas festividades, incluindo o Festival do Açaí e o Festival Internacional de Cinema da Amazônia.</p>
+
+    <h2>Dados Geográficos</h2>
+    <p>Rio Branco está situada a uma altitude de 166 metros, com uma área total de 8.576 km². O clima é equatorial, com chuvas abundantes durante a maior parte do ano.</p>
+
+    <h2>História Breve</h2>
+    <p>A cidade foi fundada em 28 de dezembro de 1882 e cresceu rapidamente devido à extração de borracha no final do século XIX. A cidade desempenhou um papel fundamental na história do Acre e suas lutas pela autonomia.</p>
+
+    <h2>Quartéis no Acre</h2>
+    <ul>
+      <li onclick="toggleDetails('detalhes1')"><strong>7º Batalhão de Engenharia de Construção</strong>
+        <div id="detalhes1" class="details">
+          <p><strong>Descrição:</strong> Responsável por atividades de engenharia, construção de estradas e apoio em operações.</p>
+          <p><strong>Link:</strong> <a href="https://www.eb.mil.br/quarteis-por-estado" target="_blank">Mais informações</a></p>
+        </div>
+      </li>
+      <li onclick="toggleDetails('detalhes2')"><strong>Comando de Fronteira Acre e 4º BIS</strong>
+        <div id="detalhes2" class="details">
+          <p><strong>Descrição:</strong> Atuando na defesa das fronteiras e em ações de segurança pública.</p>
+          <p><strong>Link:</strong> <a href="https://www.eb.mil.br/quarteis-por-estado" target="_blank">Mais informações</a></p>
+        </div>
+      </li>
+      <li onclick="toggleDetails('detalhes3')"><strong>Comando de Fronteira Juruá/61º BIS</strong>
+        <div id="detalhes3" class="details">
+          <p><strong>Descrição:</strong> Focado na proteção e na segurança das áreas de fronteira, realizando patrulhas e operações.</p>
+          <p><strong>Link:</strong> <a href="https://github.com/Projeto-Mapa/Mapa/blob/main/61bis.html" target="_blank">Mais informações</a></p>
+        </div>
+      </li>
+    </ul>
+
+    <h2>Sobre os Quartéis</h2>
+    <p>Os quartéis são essenciais para a atuação do Exército Brasileiro na região, protegendo as fronteiras, garantindo a segurança pública e prestando assistência em emergências humanitárias.</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Exército Brasileiro - Comando Militar da Amazônia</p>
+  </footer>
+</body>
+</html>
