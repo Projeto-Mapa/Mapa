@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa Interativo - Comandos Militares de Área</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 600px; /* Altura do mapa */
+      width: 100%;   /* Largura do mapa */
+    }
+  </style>
+</head>
+<body>
+  <h1>Mapa Interativo - Comandos Militares de Área</h1>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Inicializa o mapa, centralizado no Brasil
+    var map = L.map('map').setView([-15.7801, -47.9292], 4); // Centraliza no Brasil, com zoom 4
+
+    // Adiciona a camada de fundo OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Lista de Comandos Militares de Área e suas informações
+    var comandosMilitares = [
+      {
+        nome: "Comando Militar do Norte",
+        coords: [-1.4558, -48.4902],
+        cidade: "Belém",
+        descricao: "Belém é a capital do estado do Pará e um importante centro cultural e econômico da Amazônia.",
+        imagem: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Bel%C3%A9m_-_Par%C3%A1_%28Br%29_-_021.jpg/1280px-Bel%C3%A9m_-_Par%C3%A1_%28Br%29_-_021.jpg",
+        populacao: "1.499.641 habitantes",
+        pontosTuristicos: ["Ver-o-Peso", "Estação das Docas", "Museu Paraense Emílio Goeldi"],
+        eventosCulturais: ["Círio de Nazaré", "Festival Internacional de Música"],
+        dadosGeograficos: "Altitude: 10 m, Área: 1.059,458 km², Clima: Equatorial",
+        historiaBreve: "Fundada em 12 de janeiro de 1616, Belém foi um dos primeiros núcleos urbanos da Amazônia."
+      },
+      {
+        nome: "Comando Militar do Nordeste",
+        coords: [-3.7172, -38.5434],
+        cidade: "Fortaleza",
+        descricao: "Fortaleza é a capital do estado do Ceará, famosa por suas belas praias e cultura vibrante.",
+        imagem: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Fortaleza_%28Cear%C3%A1%29_-_Praia_do_Futuro_2014.jpg/1280px-Fortaleza_%28Cear%C3%A1%29_-_Praia_do_Futuro_2014.jpg",
+        populacao: "2.703.391 habitantes",
+        pontosTuristicos: ["Praia do Futuro", "Centro Dragão do Mar de Arte e Cultura", "Fortaleza de Nossa Senhora da Assunção"],
+        eventosCulturais: ["Fortal", "Ceará Music"],
+        dadosGeograficos: "Altitude: 12 m, Área: 313 km², Clima: Tropical",
+        historiaBreve: "Fundada em 13 de abril de 1726, Fortaleza foi uma das primeiras cidades do Brasil a receber a influência da cultura africana."
+      },
+      {
+        nome: "Comando Militar do Sudeste",
+        coords: [-23.5505, -46.6333],
+        cidade: "São Paulo",
+        descricao: "São Paulo é a maior cidade do Brasil e um dos principais centros financeiros da América Latina.",
+        imagem: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/S%C3%A3o_Paulo_-_vista_do_parque_do_Ibirapuera.jpg/1280px-S%C3%A3o_Paulo_-_vista_do_parque_do_Ibirapuera.jpg",
+        populacao: "11.253.503 habitantes",
+        pontosTuristicos: ["Avenida Paulista", "Parque do Ibirapuera", "Museu de Arte de São Paulo"],
+        eventosCulturais: ["Carnaval de São Paulo", "Virada Cultural"],
+        dadosGeograficos: "Altitude: 760 m, Área: 1.521 km², Clima: Subtropical",
+        historiaBreve: "Fundada em 25 de janeiro de 1554, São Paulo cresceu rapidamente devido à imigração e ao desenvolvimento industrial."
+      },
+      {
+        nome: "Comando Militar do Sul",
+        coords: [-30.0346, -51.2177],
+        cidade: "Porto Alegre",
+        descricao: "Porto Alegre é a capital do Rio Grande do Sul e um centro cultural e econômico importante na região Sul.",
+        imagem: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Porto_Alegre_-_Usina_do_Guaiba_2016_01.jpg/1280px-Porto_Alegre_-_Usina_do_Guaiba_2016_01.jpg",
+        populacao: "1.484.941 habitantes",
+        pontosTuristicos: ["Lago Guaíba", "Parque Redenção", "Museu de Arte do Rio Grande do Sul"],
+        eventosCulturais: ["Festa da Uva", "Festa Nacional do Chimarrão"],
+        dadosGeograficos: "Altitude: 10 m, Área: 497,1 km², Clima: Subtropical",
+        historiaBreve: "Fundada em 26 de março de 1772, Porto Alegre foi desenvolvida a partir da colonização de imigrantes europeus."
+      },
+      {
+        nome: "Comando Militar do Centro-Oeste",
+        coords: [-20.4697, -54.6201],
+        cidade: "Campo Grande",
+        descricao: "Campo Grande é a capital do Mato Grosso do Sul, conhecida por suas belezas naturais e cultura indígena.",
+        imagem: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Campo_Grande_-_MS.jpg/1280px-Campo_Grande_-_MS.jpg",
+        populacao: "910.826 habitantes",
+        pontosTuristicos: ["Parque do Segredo", "Horto Florestal", "Museu de História Natural"],
+        eventosCulturais: ["Festival Nacional de Inverno", "Festa do Peão de Barretos"],
+        dadosGeograficos: "Altitude: 532 m, Área: 3.827,7 km², Clima: Tropical",
+        historiaBreve: "Fundada em 26 de agosto de 1899, Campo Grande cresceu rapidamente devido à agricultura e pecuária."
+      },
+      {
+        nome: "Comando Militar da Amazônia",
+        coords: [-3.1190, -60.0217],
+        cidade: "Manaus",
+        descricao: "Manaus é a capital do Amazonas e um importante centro de cultura e turismo na Amazônia.",
+        imagem: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Manaus_-_Teatro_Amazonas_2016.jpg/1280px-Manaus_-_Teatro_Amazonas_2016.jpg",
+        populacao: "2.145.444 habitantes",
+        pontosTuristicos: ["Teatro Amazonas", "Encontro das Águas", "Museu do Seringal"],
+        eventosCulturais: ["Festa de Parintins", "Carnaval de Manaus"],
+        dadosGeograficos: "Altitude: 92 m, Área: 3.877,4 km², Clima: Equatorial",
+        historiaBreve: "Fundada em 24 de outubro de 1669, Manaus é um dos principais portos da Amazônia."
+      },
+      {
+        nome: "Comando Militar do Leste",
+        coords: [-22.9068, -43.1729],
+        cidade: "Rio de Janeiro",
+        descricao: "Rio de Janeiro é a capital do estado homônimo e famosa por suas praias e paisagens deslumbrantes.",
+        imagem: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Rio_de_Janeiro_-_Praia_de_Copacabana_2015.jpg/1280px-Rio_de_Janeiro_-_Praia_de_Copacabana_2015.jpg",
+        populacao: "6.775.561 habitantes",
+        pontosTuristicos: ["Cristo Redentor", "Pão de Açúcar", "Praia de Copacabana"],
+        eventosCulturais: ["Carnaval do Rio de Janeiro", "Réveillon na Praia"],
+        dadosGeograficos: "Altitude: 0 m, Área: 1.255 km², Clima: Tropical",
+        historiaBreve: "Fundada em 1 de março de 1565, a cidade foi a capital do Brasil até 1960."
+      }
+    ];
+
+    // Loop para adicionar os marcadores dos Comandos Militares
+    comandosMilitares.forEach(function(comando) {
+      var marker = L.marker(comando.coords).addTo(map);
+      marker.bindPopup(
+        "<b>" + comando.nome + "</b><br>" +
+        "Cidade: " + comando.cidade + "<br>" +
+        "Descrição: " + comando.descricao + "<br>" +
+        "<img src='" + comando.imagem + "' alt='" + comando.cidade + "' style='width:150px; height:auto;'><br>" +
+        "População: " + comando.populacao + "<br>" +
+        "Pontos Turísticos: " + comando.pontosTuristicos.join(", ") + "<br>" +
+        "Eventos Culturais: " + comando.eventosCulturais.join(", ") + "<br>" +
+        "Dados Geográficos: " + comando.dadosGeograficos + "<br>" +
+        "História Breve: " + comando.historiaBreve
+      );
+    });
+  </script>
+</body>
+</html>
